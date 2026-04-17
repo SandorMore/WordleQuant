@@ -1,5 +1,7 @@
 import pygame as pg
-from utilities import model 
+from utilities.model import Word 
+
+word = Word(5)
 
 def main():
     pg.init()
