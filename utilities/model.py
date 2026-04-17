@@ -7,4 +7,4 @@ class Word:
     def check_for_letters(self, guess):
         for i in range(0, 5):
             if(guess[i] == self.word):
-                print("Van")
+                pass
