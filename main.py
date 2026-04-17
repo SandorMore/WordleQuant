@@ -2,7 +2,7 @@ import pygame as pg
 from utilities.model import Word 
 from utilities.pygameutil import Reader
 
-reader = Reader("words.txt")
+reader = Reader("assets/words.txt")
 word = Word(5)
 
 def main():
@@ -20,5 +20,7 @@ def main():
        pg.display.flip()
     
        clock.tick(60)
+
 if __name__ == "__main__":
+    reader.printAllWords()
     main()
