@@ -1,16 +1,11 @@
-import pygame as pg
+class Reader:
 
-class Game:
-    remainingGuesses:int
-    alreadyGuessed:bool
+    wordList : list = []
+    
+    def __init__(self, file:str):
+        with open(file, "r") as f:
+            self.wordList.append(f.read())
 
-    letters:dict = {}
-
-    def __init__(self):
-        self.remainingGuesses = 6
-        self.alreadyGuessed = False
-
-    def guess(self):
-        if self.alreadyGuessed:
-            print("Already guessed")
-        
+    def printAllWords(self):
+        for i in self.wordList:
+            print(i)
