@@ -10,7 +10,7 @@ def main():
     screen = pg.display.set_mode((1280, 720))
     clock = pg.time.Clock()
     while True:
-       screen.fill(color = "purple")
+       screen.fill(color = "green")
        
        for event in pg.event.get():
           if event.type == pg.QUIT:
