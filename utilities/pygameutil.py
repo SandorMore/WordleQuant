@@ -1,5 +1,4 @@
 class Reader:
-
     wordList : list = []
     
     def __init__(self, file:str):
@@ -10,3 +9,7 @@ class Reader:
         print("The words are")
         for i in self.wordList:
             print(i)
+    
+    def addFreq(self, dict:dict):
+        for i in self.wordList:
+            dict[i] = 1.0
