@@ -1,6 +1,4 @@
-
 wordFrequency : dict = {}
-
 class Word:
     length:int
     word:str
