@@ -7,6 +7,7 @@ from utilities.model import wordFrequency
 reader = Reader("assets/words.txt")
 slotList : list = []
 word = Word(str(rnd.choice(reader.wordList)))
+
 def DrawSlots(s:pg.display):
     
     left, top = 100, 70
@@ -32,14 +33,13 @@ def main():
         screen.fill(color = "gray")
 
         DrawSlots(s=screen)
-        if not printed:
-            print(len(slotList))
-            printed = True
-
         for event in pg.event.get():
-          if event.type == pg.QUIT:
-            pg.quit()
-            raise SystemExit
+            if event.type == pg.QUIT or event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    pg.quit()
+                    raise SystemExit
+                pg.quit()
+                raise SystemExit
        
         pg.display.flip()
     
