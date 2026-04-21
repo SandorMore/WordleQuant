@@ -36,6 +36,7 @@ def main():
         screen.fill(color = "gray") 
         DrawSlots(s=screen)
         for event in pg.event.get():
+            
             if event.type == pg.QUIT:
                 running = False
 
@@ -48,9 +49,13 @@ def main():
                     guess = guess[:-1]  
                 elif event.key == pg.K_ESCAPE:
                     running = False
-       
+                elif event.key == pg.K_RETURN:
+                    if(len(guess) == 5):
+                        for i in range(5):
+                            slotList[i].letter = guess[i]
+
+
         pg.display.flip()
-        print(guess)
         clock.tick(60)
 
 if __name__ == "__main__": 

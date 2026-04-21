@@ -10,8 +10,8 @@ class Word:
         self.length = 5
         self.randomWord = word
 
-    def check_for_letters(self, guess):
-        for i in range(0, 5):
+    def sendGuess(self, guess):
+        for i in range(5):
             if(guess[i] == self.word):
                 pass
             
