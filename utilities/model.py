@@ -4,11 +4,11 @@ wordFrequency : dict = {}
 
 class Word:
     length:int
-    word:str
+    randomWord:str
 
     def __init__(self, word:str):
         self.length = 5
-        self.word = word
+        self.randomWord = word
 
     def check_for_letters(self, guess):
         for i in range(0, 5):

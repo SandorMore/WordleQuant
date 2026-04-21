@@ -1,11 +1,12 @@
 import pygame as pg
+import random as rnd
 from utilities.model import Word, Slot 
 from utilities.pygameutil import Reader
 from utilities.model import wordFrequency
 
 reader = Reader("assets/words.txt")
-word = Word(5)
 slotList : list = []
+word = Word(str(rnd.choice(reader.wordList)))
 def DrawSlots(s:pg.display):
     
     left, top = 100, 70
@@ -23,6 +24,7 @@ def DrawSlots(s:pg.display):
        
 def main():
     pg.init()
+    print(word.randomWord)
     screen = pg.display.set_mode((1280, 860))
     clock = pg.time.Clock()
     printed:bool = False
