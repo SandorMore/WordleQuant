@@ -25,11 +25,14 @@ def main():
     pg.init()
     screen = pg.display.set_mode((1280, 860))
     clock = pg.time.Clock()
-
+    printed:bool = False
     while True:
         screen.fill(color = "gray")
 
         DrawSlots(s=screen)
+        if not printed:
+            print(len(slotList))
+            printed = True
 
         for event in pg.event.get():
           if event.type == pg.QUIT:
@@ -40,8 +43,7 @@ def main():
     
         clock.tick(60)
 
-if __name__ == "__main__":    
-    reader.printAllWords()
+if __name__ == "__main__": 
     reader.addFreq(wordFrequency)
-
+    print("Added word sucessfully")
     main()
