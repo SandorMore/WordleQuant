@@ -22,27 +22,35 @@ def DrawSlots(s:pg.display):
         left = initialLeft
         top += 110
        
-       
+
 def main():
     pg.init()
+
+    running:bool = True
     print(word.randomWord)
     screen = pg.display.set_mode((1280, 860))
     clock = pg.time.Clock()
-    printed:bool = False
-    while True:
-        screen.fill(color = "gray")
-
+    guess:str = ""
+    
+    while running:
+        screen.fill(color = "gray") 
         DrawSlots(s=screen)
         for event in pg.event.get():
-            if event.type == pg.QUIT or event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                    pg.quit()
-                    raise SystemExit
-                pg.quit()
-                raise SystemExit
+            if event.type == pg.QUIT:
+                running = False
+
+            elif event.type == pg.TEXTINPUT:
+                if len(guess) <= 5:
+                    guess += event.text 
+
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_BACKSPACE:
+                    guess = guess[:-1]  
+                elif event.key == pg.K_ESCAPE:
+                    running = False
        
         pg.display.flip()
-    
+        print(guess)
         clock.tick(60)
 
 if __name__ == "__main__": 
