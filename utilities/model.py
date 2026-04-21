@@ -1,4 +1,7 @@
+import pygame as pg
+
 wordFrequency : dict = {}
+
 class Word:
     length:int
     word:str
@@ -11,3 +14,10 @@ class Word:
         for i in range(0, 5):
             if(guess[i] == self.word):
                 pass
+            
+class Slot:
+    rect:pg.Rect
+    letter:chr
+
+    def __init__(self, left:int, top:int, width:int, height:int):
+        self.rect = pg.Rect(left,top,width,height)
