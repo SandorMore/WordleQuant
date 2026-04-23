@@ -14,18 +14,20 @@ wordingOffsetTop:int = -7
 fontColor = tuple((0,0,0))
 
 def DrawSlots(s:pg.display):    
-    left, top = 100, 70
-    initialLeft = 100
+    if not slotList:
+        left, top = 100, 70
+        initialLeft = left
 
-    for i in range(6):
-        for i in range(5):
-            pg.draw.rect(s, "black", [left, top, 100, 100], 3)
-            slotList.append(Slot(left,top,100,100))
-            left += 130
+        for row in range(6):
+            for col in range(5):
+                slotList.append(Slot(left, top, 100, 100))
+                left += 130
 
-        left = initialLeft
-        top += 110
-       
+            left = initialLeft
+            top += 110
+
+    for slot in slotList:
+        pg.draw.rect(s, "black", slot.rect, 3)
 
 def main():
     pg.init()
@@ -70,8 +72,9 @@ def main():
                             
                         elif(guess.upper() in reader.wordList):
                             responseArr = submit(word=word.randomWord, guess=guess)
-                            print(responseArr[0])
-                        if(guess.upper == word.randomWord):
+                            for i in range(len(responseArr)):
+                                print(responseArr[i])
+                        if guess.upper() == word.randomWord:
                             print("You won")
                             pg.QUIT
                             raise SystemExit
