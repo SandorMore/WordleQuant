@@ -73,7 +73,7 @@ def main():
         
         if(len(guess) >= 1):
             for i in range(len(guess)):
-                text_surface = font.render(slotList[i].letter, True, fontColor) 
+                text_surface = font.render(slotList[i].letter.upper(), True, fontColor) 
                 screen.blit(text_surface, (slotList[i].rect.left + wordingOffsetLeft, slotList[i].rect.top + wordingOffsetTop))
         pg.display.flip()
         clock.tick(60)
