@@ -1,6 +1,7 @@
-import pygame as pg
 import sys
+import pygame as pg
 import random as rnd
+from utilities.submit import submit
 from utilities.model import Word, Slot 
 from utilities.pygameutil import Reader
 from utilities.model import wordFrequency
@@ -11,8 +12,8 @@ word = Word(str(rnd.choice(reader.wordList)))
 wordingOffsetLeft:int = 18
 wordingOffsetTop:int = -7
 fontColor = tuple((0,0,0))
-def DrawSlots(s:pg.display):
-    
+
+def DrawSlots(s:pg.display):    
     left, top = 100, 70
     initialLeft = 100
 
@@ -39,6 +40,8 @@ def main():
     guess:str = ""
     text_surface = font.render("", True, fontColor)
     
+    responseArr = []
+
     print(guess)
     while running:
         screen.fill(color = "gray") 
@@ -66,8 +69,8 @@ def main():
                             print("Not an accepted word")
                             
                         elif(guess.upper() in reader.wordList):
-                            print("Added")
-
+                            responseArr = submit(word=word.randomWord, guess=guess)
+                            print(responseArr[0])
                         if(guess.upper == word.randomWord):
                             print("You won")
                             pg.QUIT
