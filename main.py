@@ -41,7 +41,7 @@ def main():
                 running = False
 
             elif event.type == pg.TEXTINPUT:
-                if len(guess) <= 5:
+                if len(guess) < 5:
                     guess += event.text 
 
             elif event.type == pg.KEYDOWN:
@@ -51,14 +51,20 @@ def main():
                     running = False
                 elif event.key == pg.K_RETURN:
                     if(len(guess) == 5):
-                        for i in range(5):
-                            slotList[i].letter = guess[i]
-
-
+                        if(guess.upper() not in reader.wordList):
+                            print("Not an accepted word")
+                            
+                        if(guess.upper() in reader.wordList):
+                            for i in range(5):
+                                slotList[i].letter = guess[i]
+                                #print("Added")
+                            
+        print(guess)
         pg.display.flip()
         clock.tick(60)
 
 if __name__ == "__main__": 
     reader.addFreq(wordFrequency)
     print("Added word sucessfully")
+    #reader.printAllWords()
     main()

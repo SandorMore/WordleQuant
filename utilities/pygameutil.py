@@ -2,7 +2,7 @@ class Reader:
     wordList : list = []
     def __init__(self, file:str):
         with open(file, "r") as f:
-            self.wordList = f.readlines()
+            self.wordList = list(map(lambda x: x.strip(), f.readlines()))
 
     def printAllWords(self):
         print("The words are")
