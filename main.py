@@ -65,10 +65,13 @@ def main():
                         if(guess.upper() not in reader.wordList):
                             print("Not an accepted word")
                             
-                        # if(guess.upper() in reader.wordList):
-                        #     for i in range(5):
-                        #         slotList[i].letter = guess[i]
-                                #print("Added")
+                        elif(guess.upper() in reader.wordList):
+                            print("Added")
+
+                        if(guess.upper == word.randomWord):
+                            print("You won")
+                            pg.QUIT
+                            raise SystemExit
 
         
         if(len(guess) >= 1):
