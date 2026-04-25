@@ -13,7 +13,7 @@ wordingOffsetLeft:int = 18
 wordingOffsetTop:int = -7
 fontColor = tuple((0,0,0))
 
-def DrawSlots(s:pg.display, arr:list):    
+def DrawSlots(s:pg.display, arr:list, lowerBound:int, upperBound:int):    
     if not slotList:
         left, top = 100, 70
         initialLeft = left
@@ -22,12 +22,20 @@ def DrawSlots(s:pg.display, arr:list):
             for col in range(5):
                 slotList.append(Slot(left, top, 100, 100))
                 left += 130
-
+    
             left = initialLeft
             top += 110
 
-    for slot in slotList:
-        pg.draw.rect(s, "black", slot.rect, 3)
+    for i in range(lowerBound, upperBound): 
+        if(len(arr) >= 5):
+            if arr[i] == "g":
+                pg.draw.rect(s, "green", slotList[i].rect)
+            elif arr[i] == "y":
+                pg.draw.rect(s, "yellow", slotList[i].rect)
+            elif arr[i] == "b":
+                pg.draw.rect(s, "darkgray", slotList[i].rect)
+
+        pg.draw.rect(s, "black", slotList[i].rect, 3)
 
 def main():
     pg.init()
@@ -42,13 +50,15 @@ def main():
     guess:str = ""
     text_surface = font.render("", True, fontColor)
     
+    lowerBound:int = 0
+    upperBound:int = 5
     responseArr = []
 
     print(guess)
     while running:
         screen.fill(color = "gray") 
         
-        DrawSlots(s=screen, arr=responseArr)
+        DrawSlots(s=screen, arr=responseArr, lowerBound=lowerBound, upperBound=upperBound)
 
         for event in pg.event.get():
             
@@ -72,6 +82,10 @@ def main():
                             
                         elif(guess.upper() in reader.wordList):
                             responseArr = submit(word=word.randomWord, guess=guess)
+
+                            lowerBound += 5
+                            upperBound += 5
+
                             for i in range(len(responseArr)):
                                 print(responseArr[i])
                         if guess.upper() == word.randomWord:
@@ -84,8 +98,12 @@ def main():
             for i in range(len(guess)):
                 text_surface = font.render(slotList[i].letter.upper(), True, fontColor) 
                 screen.blit(text_surface, (slotList[i].rect.left + wordingOffsetLeft, slotList[i].rect.top + wordingOffsetTop))
+        
+        responseArr.clear()
+
         pg.display.flip()
         clock.tick(60)
+
 
 if __name__ == "__main__": 
     reader.addFreq(wordFrequency)
