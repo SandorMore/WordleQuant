@@ -13,7 +13,7 @@ wordingOffsetLeft:int = 18
 wordingOffsetTop:int = -7
 fontColor = tuple((0,0,0))
 
-def DrawSlots(s:pg.display):    
+def DrawSlots(s:pg.display, arr:list):    
     if not slotList:
         left, top = 100, 70
         initialLeft = left
@@ -48,7 +48,7 @@ def main():
     while running:
         screen.fill(color = "gray") 
         
-        DrawSlots(s=screen)
+        DrawSlots(s=screen, arr=responseArr)
 
         for event in pg.event.get():
             
