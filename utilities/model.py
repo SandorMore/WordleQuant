@@ -17,7 +17,8 @@ class Word:
             
 class Slot:
     rect:pg.Rect
-    letter:chr
+    letter:str
 
     def __init__(self, left:int, top:int, width:int, height:int):
         self.rect = pg.Rect(left,top,width,height)
+        self.letter = ""

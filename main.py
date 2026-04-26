@@ -26,16 +26,24 @@ def DrawSlots(s:pg.display, arr:list, lowerBound:int, upperBound:int):
             left = initialLeft
             top += 110
 
-    for i in range(lowerBound, upperBound): 
-        if(len(arr) >= 5):
-            if arr[i] == "g":
-                pg.draw.rect(s, "green", slotList[i].rect)
-            elif arr[i] == "y":
-                pg.draw.rect(s, "yellow", slotList[i].rect)
-            elif arr[i] == "b":
-                pg.draw.rect(s, "darkgray", slotList[i].rect)
+    # Draw all slot borders first so the full board is visible.
+    for slot in slotList:
+        pg.draw.rect(s, "black", slot.rect, 3)
 
-        pg.draw.rect(s, "black", slotList[i].rect, 3)
+    # Color the current row based on feedback array.
+    if len(arr) >= 5:
+        row_length = min(len(arr), upperBound - lowerBound)
+        for j in range(row_length):
+            idx = lowerBound + j
+            if idx >= len(slotList):
+                break
+
+            if arr[j] == "g":
+                pg.draw.rect(s, "green", slotList[idx].rect)
+            elif arr[j] == "y":
+                pg.draw.rect(s, "yellow", slotList[idx].rect)
+            elif arr[j] == "b":
+                pg.draw.rect(s, "darkgray", slotList[idx].rect)
 
 def main():
     pg.init()
@@ -52,6 +60,7 @@ def main():
     
     lowerBound:int = 0
     upperBound:int = 5
+
     responseArr = []
 
     print(guess)
@@ -69,7 +78,7 @@ def main():
                 if len(guess) < 5:
                     guess += event.text 
                     for i in range(len(guess)):
-                        slotList[i].letter = guess[i]
+                        slotList[lowerBound + i].letter = guess[i]
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_BACKSPACE:
                     guess = guess[:-1]  
@@ -85,22 +94,20 @@ def main():
 
                             lowerBound += 5
                             upperBound += 5
+                            guess = ""
 
-                            for i in range(len(responseArr)):
-                                print(responseArr[i])
                         if guess.upper() == word.randomWord:
                             print("You won")
                             pg.QUIT
                             raise SystemExit
 
         
-        if(len(guess) >= 1):
+        if len(guess) >= 1:
             for i in range(len(guess)):
-                text_surface = font.render(slotList[i].letter.upper(), True, fontColor) 
-                screen.blit(text_surface, (slotList[i].rect.left + wordingOffsetLeft, slotList[i].rect.top + wordingOffsetTop))
+                idx = lowerBound + i
+                text_surface = font.render(slotList[idx].letter.upper(), True, fontColor) 
+                screen.blit(text_surface, (slotList[idx].rect.left + wordingOffsetLeft, slotList[idx].rect.top + wordingOffsetTop))
         
-        responseArr.clear()
-
         pg.display.flip()
         clock.tick(60)
 
