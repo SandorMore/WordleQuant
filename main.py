@@ -12,7 +12,8 @@ word = Word(str(rnd.choice(reader.wordList)))
 wordingOffsetLeft:int = 18
 wordingOffsetTop:int = -7
 fontColor = tuple((0,0,0))
-lettersAlready:list = []
+lettersAlready:dict = {}
+
 def DrawSlots(s:pg.display, arr:list, lowerBound:int, upperBound:int):    
     if not slotList:
         left, top = 100, 70
@@ -49,6 +50,7 @@ def main():
     pg.init()
     pg.font.init()
 
+    position:int = 0
     running:bool = True
 
     font:pg.font = pg.font.SysFont("Comic Sans MS", 80)
@@ -107,9 +109,11 @@ def main():
                 idx = lowerBound + i
                 text_surface = font.render(slotList[idx].letter.upper(), True, fontColor) 
                 screen.blit(text_surface, (slotList[idx].rect.left + wordingOffsetLeft, slotList[idx].rect.top + wordingOffsetTop))
-                lettersAlready.append(guess[i])
+                lettersAlready[slotList[idx].letter] = position
 
+                position+=1
                 
+
         pg.display.flip()
         clock.tick(60)
 
