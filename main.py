@@ -109,9 +109,6 @@ def main():
                 idx = lowerBound + i
                 text_surface = font.render(slotList[idx].letter.upper(), True, fontColor) 
                 screen.blit(text_surface, (slotList[idx].rect.left + wordingOffsetLeft, slotList[idx].rect.top + wordingOffsetTop))
-                lettersAlready[slotList[idx].letter] = position
-
-                position+=1
                 
 
         pg.display.flip()
