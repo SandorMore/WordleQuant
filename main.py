@@ -110,6 +110,8 @@ def main():
                 text_surface = font.render(slotList[idx].letter.upper(), True, fontColor) 
                 screen.blit(text_surface, (slotList[idx].rect.left + wordingOffsetLeft, slotList[idx].rect.top + wordingOffsetTop))
                 
+        for i in responseArr:
+            print(i)
 
         pg.display.flip()
         clock.tick(60)
